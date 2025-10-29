@@ -118,7 +118,7 @@ const EditableField: React.FC<EditableFieldProps> = ({ value, onChange, placehol
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`bg-transparent p-1 w-full focus:outline-none focus:bg-blue-50/50 rounded-md transition-colors ${className}`}
+        className={`bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md transition-colors ${className}`}
     />
 );
 
@@ -561,8 +561,8 @@ const App: React.FC = () => {
 
         // --- ITEMS TABLE ---
         const tableHead = isIntraState
-            ? [['S.N.', 'Description', 'HSN', 'Qty', 'Unit', 'Price', 'CGST%', 'CGST Amt', 'SGST%', 'SGST Amt', 'Amount']]
-            : [['S.N.', 'Description', 'HSN', 'Qty', 'Unit', 'Price', 'IGST%', 'IGST Amt', 'Amount']];
+            ? [['S.N.', 'Description', 'HSN', 'Qty', 'Unit', 'Price', 'CGST Rate', 'CGST Amt', 'SGST Rate', 'SGST Amt', 'Amount']]
+            : [['S.N.', 'Description', 'HSN', 'Qty', 'Unit', 'Price', 'IGST Rate', 'IGST Amt', 'Amount']];
 
         const tableBody = calculations.calculatedItems.map((item, index) => {
             const description = `${item.name}${item.detailedDescription ? `\n${item.detailedDescription}` : ''}`;
@@ -736,7 +736,7 @@ const App: React.FC = () => {
                     <div className="text-sm text-gray-700 space-y-2">
                         <div className="flex justify-between">
                             <span className="font-semibold">Invoice No.:</span>
-                            <EditableField value={invoiceDetails.invoiceNo} onChange={(e) => setInvoiceDetails({...invoiceDetails, invoiceNo: e.target.value})} className="text-right" />
+                            <EditableField value={invoiceDetails.invoiceNo} onChange={(e) => setInvoiceDetails({...invoiceDetails, invoiceNo: e.target.value})} className="text-right w-full" />
                         </div>
                         <div className="flex justify-between">
                             <span className="font-semibold">Dated:</span>
@@ -744,7 +744,7 @@ const App: React.FC = () => {
                         </div>
                         <div className="flex justify-between">
                             <span className="font-semibold">Place of Supply:</span>
-                             <EditableField value={invoiceDetails.placeOfSupply} onChange={(e) => setInvoiceDetails({...invoiceDetails, placeOfSupply: e.target.value})} className="text-right" />
+                             <EditableField value={invoiceDetails.placeOfSupply} onChange={(e) => setInvoiceDetails({...invoiceDetails, placeOfSupply: e.target.value})} className="text-right w-full" />
                         </div>
                         <div className="flex justify-between">
                             <span className="font-semibold">Reverse Charge:</span>
@@ -759,52 +759,52 @@ const App: React.FC = () => {
                         <table className="w-full text-sm text-left text-gray-500">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-100 border-y">
                                 <tr>
-                                    <th scope="col" className="px-4 py-3 w-10">S.N.</th>
-                                    <th scope="col" className="px-4 py-3 min-w-[200px]">Description of Goods</th>
-                                    <th scope="col" className="px-4 py-3">HSN/SAC</th>
-                                    <th scope="col" className="px-4 py-3 text-right">Qty</th>
-                                    <th scope="col" className="px-4 py-3">Unit</th>
-                                    <th scope="col" className="px-4 py-3 text-right">Price</th>
+                                    <th scope="col" className="px-1 py-3 w-10">S.N.</th>
+                                    <th scope="col" className="px-1 py-3 min-w-[200px]">Description of Goods</th>
+                                    <th scope="col" className="px-1 py-3 w-20">HSN/SAC</th>
+                                    <th scope="col" className="px-1 py-3 text-right">Qty</th>
+                                    <th scope="col" className="px-1 py-3">Unit</th>
+                                    <th scope="col" className="px-1 py-3 text-right">Price</th>
                                     {isIntraState ? (
                                         <>
-                                            <th scope="col" className="px-4 py-3 text-center" colSpan={2}>CGST</th>
-                                            <th scope="col" className="px-4 py-3 text-center" colSpan={2}>SGST</th>
+                                            <th scope="col" className="px-1 py-3 text-center" colSpan={2}>CGST</th>
+                                            <th scope="col" className="px-1 py-3 text-center" colSpan={2}>SGST</th>
                                         </>
                                     ) : (
-                                        <th scope="col" className="px-4 py-3 text-center" colSpan={4}>IGST</th>
+                                        <th scope="col" className="px-1 py-3 text-center" colSpan={4}>IGST</th>
                                     )}
-                                    <th scope="col" className="px-4 py-3 text-right">Amount (₹)</th>
+                                    <th scope="col" className="px-1 py-3 text-right">Amount (₹)</th>
                                     <th scope="col" className="px-1 py-3 no-print"></th>
                                 </tr>
                                  <tr className="text-xs text-gray-700 bg-gray-100">
-                                    <th className="px-4 py-1"></th>
-                                    <th className="px-4 py-1"></th>
-                                    <th className="px-4 py-1"></th>
-                                    <th className="px-4 py-1"></th>
-                                    <th className="px-4 py-1"></th>
-                                    <th className="px-4 py-1"></th>
+                                    <th className="px-1 py-1"></th>
+                                    <th className="px-1 py-1"></th>
+                                    <th className="px-1 py-1"></th>
+                                    <th className="px-1 py-1"></th>
+                                    <th className="px-1 py-1"></th>
+                                    <th className="px-1 py-1"></th>
                                     {isIntraState ? (
                                         <>
-                                            <th className="px-2 py-1 text-center border-l">Rate</th>
-                                            <th className="px-2 py-1 text-right border-l">Amount</th>
-                                            <th className="px-2 py-1 text-center border-l">Rate</th>
-                                            <th className="px-2 py-1 text-right border-l">Amount</th>
+                                            <th className="px-1 py-1 text-center border-l">Rate (%)</th>
+                                            <th className="px-1 py-1 text-right border-l">Amount</th>
+                                            <th className="px-1 py-1 text-center border-l">Rate (%)</th>
+                                            <th className="px-1 py-1 text-right border-l">Amount</th>
                                         </>
                                      ) : (
                                         <>
-                                            <th className="px-2 py-1 text-center border-l" colSpan={2}>Rate</th>
-                                            <th className="px-2 py-1 text-right border-l" colSpan={2}>Amount</th>
+                                            <th className="px-1 py-1 text-center border-l" colSpan={2}>Rate (%)</th>
+                                            <th className="px-1 py-1 text-right border-l" colSpan={2}>Amount</th>
                                         </>
                                      )}
-                                    <th className="px-4 py-1"></th>
+                                    <th className="px-1 py-1"></th>
                                     <th className="px-1 py-1 no-print"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {calculations.calculatedItems.map((item, index) => (
                                     <tr key={item.id} className="border-b hover:bg-gray-50">
-                                        <td className="px-4 py-2">{index + 1}</td>
-                                        <td className="px-4 py-2">
+                                        <td className="px-1 py-2">{index + 1}</td>
+                                        <td className="px-1 py-2">
                                             <EditableTextarea 
                                                 value={item.name} 
                                                 onChange={(e) => handleItemChange(item.id, 'name', e.target.value)} 
@@ -819,40 +819,40 @@ const App: React.FC = () => {
                                                 className="text-xs italic w-full text-gray-500"
                                             />
                                         </td>
-                                        <td className="px-4 py-2">
-                                            <EditableField value={item.hsn} onChange={(e) => handleItemChange(item.id, 'hsn', e.target.value)} />
+                                        <td className="px-1 py-2">
+                                            <EditableField value={item.hsn} onChange={(e) => handleItemChange(item.id, 'hsn', e.target.value)} className="w-full" />
                                         </td>
-                                        <td className="px-4 py-2 text-right">
+                                        <td className="px-1 py-2 text-right">
                                             <EditableNumberField value={item.qty} onChange={(newValue) => handleItemChange(item.id, 'qty', newValue)} className="w-20 text-right bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" decimalPlaces={0} />
                                         </td>
-                                        <td className="px-4 py-2">
-                                            <EditableField value={item.unit} onChange={(e) => handleItemChange(item.id, 'unit', e.target.value)} />
+                                        <td className="px-1 py-2">
+                                            <EditableField value={item.unit} onChange={(e) => handleItemChange(item.id, 'unit', e.target.value)} className="w-full" />
                                         </td>
-                                        <td className="px-4 py-2 text-right">
+                                        <td className="px-1 py-2 text-right">
                                             <EditableNumberField value={item.price} onChange={(newValue) => handleItemChange(item.id, 'price', newValue)} className="w-24 text-right bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" decimalPlaces={2} />
                                         </td>
                                         
                                         {isIntraState ? (
                                             <>
-                                                <td className="px-2 py-2 border-l">
-                                                    <input type="number" value={item.cgstRate} onChange={(e) => handleItemChange(item.id, 'cgstRate', parseFloat(e.target.value) || 0)} className="w-14 text-center bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" />%
+                                                <td className="px-1 py-2 border-l">
+                                                    <input type="number" value={item.cgstRate} onChange={(e) => handleItemChange(item.id, 'cgstRate', parseFloat(e.target.value) || 0)} className="w-14 text-center bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" />
                                                 </td>
-                                                <td className="px-2 py-2 text-right border-l tabular-nums">{item.cgstAmount}</td>
-                                                <td className="px-2 py-2 border-l">
-                                                    <input type="number" value={item.sgstRate} onChange={(e) => handleItemChange(item.id, 'sgstRate', parseFloat(e.target.value) || 0)} className="w-14 text-center bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" />%
+                                                <td className="px-1 py-2 text-right border-l tabular-nums">{item.cgstAmount}</td>
+                                                <td className="px-1 py-2 border-l">
+                                                    <input type="number" value={item.sgstRate} onChange={(e) => handleItemChange(item.id, 'sgstRate', parseFloat(e.target.value) || 0)} className="w-14 text-center bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" />
                                                 </td>
-                                                <td className="px-2 py-2 text-right border-l tabular-nums">{item.sgstAmount}</td>
+                                                <td className="px-1 py-2 text-right border-l tabular-nums">{item.sgstAmount}</td>
                                             </>
                                         ) : (
                                             <>
-                                                <td className="px-2 py-2 border-l text-center" colSpan={2}>
-                                                    <input type="number" value={item.igstRate} onChange={(e) => handleItemChange(item.id, 'igstRate', parseFloat(e.target.value) || 0)} className="w-14 text-center bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" />%
+                                                <td className="px-1 py-2 border-l text-center" colSpan={2}>
+                                                    <input type="number" value={item.igstRate} onChange={(e) => handleItemChange(item.id, 'igstRate', parseFloat(e.target.value) || 0)} className="w-14 text-center bg-transparent p-1 focus:outline-none focus:bg-blue-50/50 rounded-md" />
                                                 </td>
-                                                <td className="px-2 py-2 text-right border-l tabular-nums" colSpan={2}>{item.igstAmount}</td>
+                                                <td className="px-1 py-2 text-right border-l tabular-nums" colSpan={2}>{item.igstAmount}</td>
                                             </>
                                         )}
                                         
-                                        <td className="px-4 py-2 text-right font-semibold tabular-nums">{item.totalAmount}</td>
+                                        <td className="px-1 py-2 text-right font-semibold tabular-nums">{item.totalAmount}</td>
                                         <td className="px-1 py-2 no-print">
                                             <button onClick={() => removeItem(item.id)} className="text-red-500 hover:text-red-700">
                                                 <TrashIcon className="w-4 h-4" />
