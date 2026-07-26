@@ -675,6 +675,39 @@ const App: React.FC = () => {
                     {notification.message}
                 </div>
             )}
+
+            {/* Dedicated Action Bar */}
+            <div className="max-w-5xl mx-auto mb-6 bg-white rounded-xl shadow-md p-4 flex flex-col sm:flex-row justify-between items-center no-print border border-gray-100">
+                <div className="flex items-center space-x-3 mb-4 sm:mb-0">
+                    <div className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span className="text-gray-800 font-bold text-lg tracking-wide uppercase">Invoice Portal</span>
+                    <span className="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full">GST Ready</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-3">
+                    <button
+                        onClick={handleExportPdf}
+                        className="flex items-center px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 text-sm cursor-pointer"
+                    >
+                        <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
+                        Export PDF
+                    </button>
+                    <button
+                        onClick={handlePrint}
+                        className="flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 text-sm cursor-pointer"
+                    >
+                        <PrinterIcon className="h-5 w-5 mr-2" />
+                        Print Invoice
+                    </button>
+                    <button
+                        onClick={handleReset}
+                        className="flex items-center px-5 py-2.5 bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 text-sm cursor-pointer"
+                    >
+                        <ArrowUturnLeftIcon className="h-5 w-5 mr-2" />
+                        Reset Invoice
+                    </button>
+                </div>
+            </div>
+
             <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-lg p-6 sm:p-10 print-container">
                 {/* Header */}
                 <header className="flex justify-between items-start pb-4 border-b-2 border-gray-200">
